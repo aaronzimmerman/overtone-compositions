@@ -2,6 +2,23 @@
 
 Collection of pieces written in clojure and overtone by Aaron Zimmerman (https://twitter.com/apzimmerman).
 
+## Windows:
+
+https://soundcloud.com/aaron-zimmerman/windows-melody
+https://soundcloud.com/aaron-zimmerman/windows-speech
+
+
+ lein repl
+ (use 'com.zimmermusic.windows)
+ (windows "/path/to/sample.aiff" [2 3 4] 10000 400)
+
+ the first argument is an audio file.  It needs to be sampled at 44100 and stereo.
+ second argument is a vector of scalars at which to create additional windows past the one created with:
+ third argument:  the base window size, in samples.
+ fourth argument:  the base step size, how far to move the window after each repetition
+
+
+
 ## Spheres:
 
 
