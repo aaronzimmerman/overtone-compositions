@@ -185,18 +185,19 @@
 
 ;; instrument stuff
 
-;; every iteration is n notes away from the fundamental, the entire piece is n such trips
 (definst plop
   [note  400 pan 0.0 atk 0.1 dcy 0.1]
   (let [snd (sin-osc note)
         env (env-gen (perc atk dcy) :action FREE)]
     (out 0
-      (pan2
+     (lpf1 
+       (pan2
         (*
-          0.8 ; volume
+          0.6 ; volume
           env ; envelope=
           snd )
-        pan))))
+        pan)
+       3000 ))))
 
 
 (def choices
@@ -219,7 +220,7 @@
       (repeat 1 15)
       (repeat 1 16))))
 
-
+; (get-next-note 60 1)
 (defn get-next-note[pitch dur]
   (let [numerator (first (shuffle choices))
         allowed-to-go-higher (>= 1800 pitch)
@@ -285,8 +286,12 @@
   "Bootstrap the first iteration and begin the piece"
   (init-graphics num)
   (let [stanzas (map inc (flatten (concat (range num) (reverse (range (dec num))))))]
+    (println stanzas)
     (diamond-iter plop section-length stanzas)))
 
+;
+; (diamonds 19 5000)
+;
 
 
 

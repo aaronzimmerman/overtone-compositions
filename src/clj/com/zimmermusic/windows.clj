@@ -25,17 +25,18 @@
 
 
 (defn play-window[sample window-length adjust start-at pan level index]
-  (let [duration (duration-for-num-samples window-length)
-        next-start-samp (+ adjust start-at)
+  (let [duration (duration-for-num-samples window-length) ;convert samples to seconds
+        next-start-samp (+ adjust start-at) ; add the adjust to the sample start for the next iteration
         next-start-time (+ (now) (* 1000 duration))
         pan-adjust (/ (- (rand-int 10) 5) 100.0)
         new-pan (+ pan pan-adjust)]
     (bp2 start-at duration pan level)
     (update-ui index start-at)
-    ;(println "window " window-length " pan " pan)
     (if (<= (+ window-length next-start-samp) (:size sample))
       (apply-at next-start-time #'play-window[sample window-length adjust next-start-samp new-pan level index])
       (println "window length " window-length " done"))))
+
+
 
 (defn duration-for-window-size[window adjustment total]
   (let [iterations (- (/ total adjustment) (/ window adjustment))
@@ -159,3 +160,9 @@
 
 (defn end[]
   (stop))
+
+
+
+;(windows "resources/guitar.aiff" (range 1 20 2) 20000 1000)
+(windows "resources/oliver.aiff" (range 1 30) 20000 1000)
+
