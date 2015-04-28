@@ -1,6 +1,21 @@
 # overtone-compositions
 
-Collection of pieces written in clojure and overtone by Aaron Zimmerman (https://twitter.com/apzimmerman).
+Collection of pieces written in clojure and overtone by Aaron Zimmerman 
+
+https://twitter.com/apzimmerman
+
+https://soundcloud.com/aaron-zimmerman/
+
+## Fractals:
+
+	lein repl
+	(use 'com.zimmermusic.fractals)
+	(fractals '(0 6 1 2 6 11 5 4))
+	
+Only argument is a sequence of integers between 0 and 11.  First a vocabulary of 12 functions that produce sound are created, and then a section will be played for each provided integer n.  During each section, n functions will be played for n seconds, starting at n pitch, at n tempo.
+
+Each sequnce of integers will produce a new piece, but the piece will be exactly the same for each.  The more integers provided, the longer the piece will be. 
+
 
 ## Windows:
 
@@ -8,14 +23,17 @@ https://soundcloud.com/aaron-zimmerman/windows-melody
 https://soundcloud.com/aaron-zimmerman/windows-speech
 
 
- lein repl
- (use 'com.zimmermusic.windows)
- (windows "/path/to/sample.aiff" [2 3 4] 10000 400)
+ 	lein repl
+ 	(use 'com.zimmermusic.windows)
+ 	(windows "/path/to/sample.aiff" [2 3 4] 10000 400)
 
- the first argument is an audio file.  It needs to be sampled at 44100 and stereo.
- second argument is a vector of scalars at which to create additional windows past the one created with:
- third argument:  the base window size, in samples.
- fourth argument:  the base step size, how far to move the window after each repetition
+The first argument is an audio file.  It needs to be sampled at 44100 and stereo.
+ 
+Second argument is a vector of scalars at which to create additional windows past the one created with:
+
+Third argument:  the base window size, in samples.
+
+Fourth argument:  the base step size, how far to move the window after each repetition
 
 
 
@@ -55,6 +73,7 @@ So to run, you need to create samples under overtone-compositions/resources:
    "f83.aiff"
 
  These should all be around 60 seconds of an instrument playing the midi note represented in the file name.
+ 
  I can help you figure out how to get these do this if you are interested. Maybe I can find some on freesound but I haven't been able to yet.
 
 
