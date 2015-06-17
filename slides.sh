@@ -1,7 +1,7 @@
 #!/bin/bash
 
 font=mono12
-small=smblock
+small=smmono9
 
 clear
 toilet -f $font -t Audible
@@ -43,10 +43,13 @@ clear
 
 toilet -f $font -t Form
 read
-toilet -f $small -t Verse-Chorus
-toilet -f $small -t 12 Bar Blues
-toilet -f $small -t Sonata
-toilet -f $small -t Canon
+toilet -f $small -t "  - Verse-Chorus"
+read
+toilet -f $small -t "  - 12 Bar Blues"
+read
+toilet -f $small -t "  - Sonata"
+read
+toilet -f $small -t "  - Canon"
 
 read
 clear
@@ -70,7 +73,7 @@ clear
 
 toilet -f $font -t Fractals
 toilet -f $font "   "
-toilet -f $small seed_numbers
+toilet -f $small -t "(fractals seed_numbers)"
 
 
 read
@@ -85,7 +88,9 @@ clear
 
 toilet -f $font -t Represent a note
 toilet -f $font -t as a map
+read
 toilet -f $small -t ":p   for pitch (vector)"
+read
 toilet -f $small -t ":d   for duration"
 
 
@@ -94,24 +99,29 @@ clear
 
 toilet -f $font -t Then create melodies
 toilet -f $font -t and transform them
-toilet -f $small -t "reverse,   inversion,   lengthen,   shorten,   add-interval,   transpose"
+toilet -f $small -t "reverse, inversion, lengthen"
+toilet -f $small -t "shorten, add-interval, transpose"
 
 
 read
 clear
 
 toilet -f $font -t Create a vocabulary
-toilet -f $font -t of such functions
+toilet -f $font -t of melody functions
 
 
 read
 clear
 
 toilet -f $font -t for each number n:
-toilet -f $small -t "play   the   first   n   vocab   functions"
-toilet -f $small -t "each   starting   from   pitch   class   n"
-toilet -f $small -t "for   n   seconds"
-toilet -f $small -t "at   n   speed"
+read
+toilet -f $small -t "  - play the first n vocab functions"
+read
+toilet -f $small -t "  - each starting from pitch class n"
+read
+toilet -f $small -t "  - for n seconds"
+read
+toilet -f $small -t "  - at n speed"
 
 #read
 #clear
@@ -127,11 +137,16 @@ toilet -f $small -t "at   n   speed"
 read
 clear
 
-toilet -f $small -t "Iannis   Xenakis"
-toilet -f $small -t "John   Cage"
+toilet -f $small -t "Iannis Xenakis"
+toilet -f $small -t "John Cage"
 toilet -f $small -t "Karlheinz Stockhausen"
-toilet -f $small -t "Philip   Glass   /   Steve   Reich"
-toilet -f $small -t "Avro   Pärt"
+toilet -f $small -t "Philip Glass / Steve   Reich"
+toilet -f $small -t "Avro  Pärt"
+toilet -f $small -t "Paul  Lansky"
+
+read
+clear
+
 
 toilet -f $small -t soundcloud.com/apzimmerman
 toilet -f $small -t github.com/aaronzimmerman/overtone-compositions

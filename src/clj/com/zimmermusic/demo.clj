@@ -20,7 +20,6 @@
 
 
 
-
 ; ▗▄         ▐    ▝       ▝              ▗  ▖
 ;▗▘ ▘ ▄▖ ▗▄▄ ▐▄▖ ▗▄  ▗▗▖ ▗▄  ▗▗▖  ▄▄     ▐  ▌ ▄▄  ▄▖ ▗▗▖  ▄▖
 ;▐   ▐▘▜ ▐▐▐ ▐▘▜  ▐  ▐▘▐  ▐  ▐▘▐ ▐▘▜     ▐  ▌▐▘▜ ▐▘▐ ▐▘▐ ▐ ▝
@@ -85,14 +84,19 @@
 
 (guitar)
 
-(def buf (load-sample "resources/guitar.aiff"));
+(def buf (load-sample "resources/guitar.aiff"))
 
-(scope buf)
+(definst play[start 0 duration 1]
+  (let [env (env-gen (envelope [0.0 0.8 0.8 0.0] [0.1 duration 0.1]) :action FREE)]
+    (* env
+       (play-buf 2 (:id buf) :start-pos start))))
 
-(definst play[]
-  (scaled-play-buf 2 (:id buf) :action FREE))
 
 (play)
+
+(doseq [x (range 100)]
+  (play (* x 2000) 0.5)
+    (Thread/sleep 500))
 
 (stop)
 
@@ -113,7 +117,7 @@
 
 (nome)     
 
-(nome 140) 
+(bigint (nome 140)) 
 
 (use 'overtone.inst.drum)
 
@@ -129,6 +133,7 @@
     (apply-by next-start #'looper[inst nome offset])))
 
 (looper kick4 nome 0)
+
 (looper closed-hat nome 0.5)
 (looper closed-hat nome 0.75)
 (stop)
@@ -141,7 +146,6 @@
 
 
 (use 'overtone.inst.sampled-piano)
-(sampled-piano)
 
 (def ode-to-joy [[:e4 1][:e4 1][:f4 1][:g4 1][:g4 1][:f4 1][:e4 1][:d4 1][:c4 1][:c4 1][:d4 1][:e4 1][:e4 1.5][:d4 0.5][:d4 2]
                  [:e4 1][:e4 1][:f4 1][:g4 1][:g4 1][:f4 1][:e4 1][:d4 1][:c4 1][:c4 1][:d4 1][:e4 1][:d4 1.5][:c4 0.5][:c4 2]
@@ -159,8 +163,10 @@
         duration-ms (* bl dur 0.95)
         duration-s (/ duration-ms 1000)
         remaining (rest notes)]
+   
     (doseq [pitch (if (seq? pitches) pitches [pitches])]
       (at time (inst (note pitch) level :sustain duration-s)))
+   
     (when (not-empty remaining)
       (let [next-time (+ duration-ms time)]
         (apply-by next-time #'play-notes[inst next-time remaining bl level])))))
